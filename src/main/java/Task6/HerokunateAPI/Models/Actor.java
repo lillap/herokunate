@@ -11,9 +11,11 @@ import java.util.Date;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
+
 public class Actor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -22,7 +24,7 @@ public class Actor {
     @Column
     private String lastName;
 
-    @Column
+    @Column(nullable = false)
     private Date dateOfBirth;
 
     @Column
