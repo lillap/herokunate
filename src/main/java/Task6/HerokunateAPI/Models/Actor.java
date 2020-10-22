@@ -16,7 +16,7 @@ public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @Column
     private String firstName;
@@ -34,7 +34,7 @@ public class Actor {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
