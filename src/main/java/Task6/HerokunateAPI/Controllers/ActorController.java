@@ -28,9 +28,14 @@ public class ActorController {
         CommonResponse commonResponse = new CommonResponse();
 
         commonResponse.data = actor;
-        commonResponse.message = "New actor with id: " + actor.id;
+        commonResponse.message = "New actor with id: " + actor.getId();
 
         HttpStatus httpStatus = HttpStatus.CREATED;
+
+        response.addHeader("Location", "/actor/" + actor.getId());
+
+        //Ad log here before return
+        return new ResponseEntity<>(commonResponse, httpStatus);
         
 
     }
