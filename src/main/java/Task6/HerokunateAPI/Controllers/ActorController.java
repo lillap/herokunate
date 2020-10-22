@@ -26,7 +26,7 @@ public class ActorController {
         CommonResponse commonResponse = new CommonResponse();
 
         commonResponse.data = actor;
-        commonResponse.message = "New actor with id: " + actor.getId();
+        commonResponse.message = "New actor created with id: " + actor.getId();
 
         HttpStatus httpStatus = HttpStatus.CREATED;
 
@@ -47,10 +47,10 @@ public class ActorController {
         
         return new ResponseEntity<>(commonResponse, HttpStatus.OK);
     }
-
+    /*
     @GetMapping("/actor/{id}")
     ResponseEntity<CommonResponse> getActorById(HttpServletRequest request, @PathVariable("id") Integer id){
 
-    }
+    } */
 
 }
