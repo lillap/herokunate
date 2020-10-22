@@ -19,7 +19,7 @@ public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
-
+/*Add an actor */
     @PostMapping("/actor")
     public ResponseEntity<CommonResponse> addActor(HttpServletRequest request, HttpServletResponse response,
                                                    @RequestBody Actor actor) {
@@ -36,8 +36,19 @@ public class ActorController {
 
         //Ad log here before return
         return new ResponseEntity<>(commonResponse, httpStatus);
-        
 
+    }
+
+    @PostMapping("/actor/all")
+    public ResponseEntity<CommonResponse> getAllActors(HttpServletRequest request){
+
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.data = actorRepository.findAll();
+        commonResponse.message = "All actors";
+
+        HttpStatus httpStatus = HttpStatus.OK;
+
+        return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
 }
