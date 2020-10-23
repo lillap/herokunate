@@ -31,8 +31,6 @@ public class ActorController {
 
         HttpStatus httpStatus = HttpStatus.CREATED;
 
-        response.addHeader("Location", "/actor/" + actor.getId());
-
         //Ad log here before return
         return new ResponseEntity<>(commonResponse, httpStatus);
 

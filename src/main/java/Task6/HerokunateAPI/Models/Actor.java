@@ -30,7 +30,7 @@ public class Actor {
     @Column
     private String url;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
