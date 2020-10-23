@@ -38,7 +38,7 @@ public class ActorController {
 
     }
 
-    /*Get all actors with .findAll() */
+    /*Get all actors with method findAll */
     @GetMapping("/actor/all")
     public ResponseEntity<CommonResponse> getAllActors(HttpServletRequest request) {
 
@@ -49,6 +49,7 @@ public class ActorController {
         return new ResponseEntity<>(commonResponse, HttpStatus.OK);
     }
 
+    /*Get actor by first checking if given id exists, if not, return message with actor was not found */
     @GetMapping("/actor/{id}")
     ResponseEntity<CommonResponse> getActorById(HttpServletRequest request, @PathVariable("id") Integer id) {
 
@@ -69,7 +70,7 @@ public class ActorController {
 
     }
 
-    @PatchMapping("/actor/update/{id}")
+    @PatchMapping("/actor/{id}")
     public ResponseEntity<CommonResponse> updateActor(HttpServletRequest request,
                                                       @RequestBody Actor updatedActor,
                                                       @PathVariable Integer id){
@@ -83,19 +84,19 @@ public class ActorController {
             Actor actor = updatedActorRepository.get();
 
             if(updatedActor.getFirstName() != null){
-               actor.getFirstName() = updatedActor.getFirstName();
+               actor.setFirstName(updatedActor.getFirstName());
             }
             if(updatedActor.getLastName() != null){
-                actor.getLastName() = updatedActor.getLastName();
+                actor.setLastName(updatedActor.getLastName());
             }
             if(updatedActor.getUrl() != null){
-                actor.getUrl() = updatedActor.getUrl();
+                actor.setUrl(updatedActor.getUrl());
             }
 
             actorRepository.save(actor);
 
             commonResponse.data = actor;
-            commonResponse.message = "Actor with id: " + id + " have been updated.";
+            commonResponse.message = "Actor with id: " + id + " has been updated.";
             httpStatus = HttpStatus.OK;
         } else {
             commonResponse.message = "Actor with id: " + id + " was not found";
@@ -105,4 +106,21 @@ public class ActorController {
         return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
+    /*Delete actor by checking first if the given id exists, if not, return a message and HttpStatus not found*/
+    @DeleteMapping("/actor/{id}")
+    public ResponseEntity<CommonResponse> deleteActor(HttpServletRequest request, @PathVariable Integer id){
+
+        CommonResponse commonResponse = new CommonResponse();
+        HttpStatus httpStatus;
+
+        if(actorRepository.existsById(id)){
+            actorRepository.deleteById(id);
+            commonResponse.message = "Actor with id: " + id + " has been deleted.";
+            httpStatus = HttpStatus.OK;
+        } else {
+            commonResponse.message = "Actor with id " + id + " was not found.";
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(commonResponse, httpStatus);
+    }
 }
