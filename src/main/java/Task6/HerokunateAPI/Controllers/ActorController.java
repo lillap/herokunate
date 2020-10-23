@@ -109,6 +109,28 @@ public class ActorController {
         return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
+    @GetMapping("/actor/{id}/movies")
+    public ResponseEntity<CommonResponse> getMoviesWithActor(HttpServletRequest request,
+                                                             @PathVariable("id") Integer id){
+        CommonResponse commonResponse = new CommonResponse();
+        HttpStatus httpStatus;
+
+        if(actorRepository.existsById(id)){
+            Optional<Actor> movieActorRepository = actorRepository.findById(id);
+            Actor actor = movieActorRepository.get();
+            commonResponse.data = actor.movies;
+            commonResponse.message = "These are the movies the actor " +
+                    actor.getFirstName() + " " + actor.getLastName() +
+                    " with id: " + id + " " + "stars in.";
+            httpStatus = HttpStatus.OK;
+        } else {
+        commonResponse.data = null;
+        commonResponse.message = "Actor with id " + id + " was not found.";
+        httpStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(commonResponse, httpStatus);
+    }
+
     /*Delete actor by checking first if the given id exists, if not, return a message and HttpStatus not found*/
     @DeleteMapping("/actor/{id}")
     public ResponseEntity<CommonResponse> deleteActor(HttpServletRequest request, @PathVariable Integer id){

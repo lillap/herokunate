@@ -4,4 +4,5 @@ package Task6.HerokunateAPI.Utils;
 public class CommonResponse {
     public Object data;
     public String message;
+
 }

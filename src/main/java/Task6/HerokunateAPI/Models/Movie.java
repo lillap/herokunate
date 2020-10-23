@@ -28,6 +28,9 @@ public class Movie {
     @Column
     private String genre;
 
+    @Column
+    private String url;
+
     @JsonGetter("actors")
     private List<String> actors() {
         return actors.stream()
@@ -39,13 +42,50 @@ public class Movie {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "Actor_In_Movie",
-            joinColumns = { @JoinColumn(name = "actor_id")  },
-            inverseJoinColumns = { @JoinColumn(name = "movie_id") }
+            name = "Movie_With_Actor",
+            joinColumns = { @JoinColumn(name = "movie_id")  },
+            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
     )
 
     private Set<Actor> actors = new HashSet<>();
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
