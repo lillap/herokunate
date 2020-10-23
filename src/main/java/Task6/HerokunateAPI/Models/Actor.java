@@ -8,9 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 
 public class Actor {
 
