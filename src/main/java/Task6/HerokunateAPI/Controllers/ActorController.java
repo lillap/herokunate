@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @RestController
 public class ActorController {
@@ -66,6 +67,42 @@ public class ActorController {
 
         return new ResponseEntity<>(commonResponse, httpStatus);
 
+    }
+
+    @PatchMapping("/actor/update/{id}")
+    public ResponseEntity<CommonResponse> updateActor(HttpServletRequest request,
+                                                      @RequestBody Actor updatedActor,
+                                                      @PathVariable Integer id){
+
+        CommonResponse commonResponse = new CommonResponse();
+
+       HttpStatus httpStatus;
+
+        if (actorRepository.existsById(id)) {
+            Optional<Actor> updatedActorRepository = actorRepository.findById(id);
+            Actor actor = updatedActorRepository.get();
+
+            if(updatedActor.getFirstName() != null){
+               actor.getFirstName() = updatedActor.getFirstName();
+            }
+            if(updatedActor.getLastName() != null){
+                actor.getLastName() = updatedActor.getLastName();
+            }
+            if(updatedActor.getUrl() != null){
+                actor.getUrl() = updatedActor.getUrl();
+            }
+
+            actorRepository.save(actor);
+
+            commonResponse.data = actor;
+            commonResponse.message = "Actor with id: " + id + " have been updated.";
+            httpStatus = HttpStatus.OK;
+        } else {
+            commonResponse.message = "Actor with id: " + id + " was not found";
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
 }
