@@ -18,6 +18,11 @@ public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
+    @GetMapping("/")
+    String hello(){
+        return "Hello There";
+    }
+
     /*Add an actor */
     @PostMapping("/actor")
     public ResponseEntity<CommonResponse> addActor(HttpServletRequest request, HttpServletResponse response,
