@@ -23,6 +23,4 @@ The application is hosted on Heroku at: https://lillap-herokunate.herokuapp.com/
 The CRUD functionality for movie is not complete yet. It is possible to add a movie and to get all movies.  
 Howver there is no implemented logic for a connection between movie and actor. 
 
-## Author
-
 
