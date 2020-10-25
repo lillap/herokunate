@@ -13,7 +13,7 @@ The endpoints to test the funcationality can be accessed with Postman by followi
 1. Open Postman and click on "import"
 2. Choose "link".
 3. Paste this link:  https://www.getpostman.com/collections/a2bedca14d265a190d22
-You're ready to go! 
+4. You're ready to go! 
 
 
 ## Hosting Platform
