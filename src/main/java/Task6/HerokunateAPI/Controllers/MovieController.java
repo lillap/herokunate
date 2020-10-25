@@ -7,10 +7,7 @@ import Task6.HerokunateAPI.Utils.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +22,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping("/movie")
-    public ResponseEntity<CommonResponse> addMovie(HttpServletRequest request, @RequestBody Movie movie){
+    public ResponseEntity<CommonResponse> addMovie(@RequestBody Movie movie){
 
         movie = movieRepository.save(movie);
 
@@ -36,6 +33,19 @@ public class MovieController {
 
         return new ResponseEntity<>(commonResponse, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/movie/all")
+    public ResponseEntity<CommonResponse> getAllMovies(){
+
+
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.data = movieRepository.findAll();
+        commonResponse.message = "These are the existing movies here";
+
+        HttpStatus httpStatus = HttpStatus.OK;
+
+        return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
 
