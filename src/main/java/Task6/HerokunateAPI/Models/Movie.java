@@ -42,7 +42,7 @@ public class Movie {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "Movie_With_Actor",
+            name = "MovieActor",
             joinColumns = { @JoinColumn(name = "movie_id")  },
             inverseJoinColumns = { @JoinColumn(name = "actor_id") }
     )
