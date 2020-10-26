@@ -7,10 +7,7 @@ import Task6.HerokunateAPI.Utils.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,6 +33,24 @@ public class MovieController {
 
         return new ResponseEntity<>(commonResponse, HttpStatus.CREATED);
 
+    }
+
+    @DeleteMapping("/movie/{id}")
+    public ResponseEntity<CommonResponse> deleteMovie(@PathVariable Integer id) {
+
+        CommonResponse commonResponse = new CommonResponse();
+        HttpStatus httpStatus;
+
+        if(movieRepository.existsById(id)) {
+            movieRepository.deleteById(id);
+            commonResponse.message = "Book with id: " + id + " was deleted.";
+            httpStatus = HttpStatus.OK;
+        } else {
+            commonResponse.message = "Book with id: " + id + " was not found.";
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(commonResponse, httpStatus);
     }
 
 
