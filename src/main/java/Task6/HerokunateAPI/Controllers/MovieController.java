@@ -35,6 +35,7 @@ public class MovieController {
 
     }
 
+<<<<<<< HEAD
     @GetMapping("/movie/all")
     public ResponseEntity<CommonResponse> getAllMovies(){
 
@@ -44,6 +45,22 @@ public class MovieController {
         commonResponse.message = "These are the existing movies here";
 
         HttpStatus httpStatus = HttpStatus.OK;
+=======
+    @DeleteMapping("/movie/{id}")
+    public ResponseEntity<CommonResponse> deleteMovie(@PathVariable Integer id) {
+
+        CommonResponse commonResponse = new CommonResponse();
+        HttpStatus httpStatus;
+
+        if(movieRepository.existsById(id)) {
+            movieRepository.deleteById(id);
+            commonResponse.message = "Book with id: " + id + " was deleted.";
+            httpStatus = HttpStatus.OK;
+        } else {
+            commonResponse.message = "Book with id: " + id + " was not found.";
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+>>>>>>> movie-controller
 
         return new ResponseEntity<>(commonResponse, httpStatus);
     }
