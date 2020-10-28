@@ -34,12 +34,7 @@ public class ActorController {
         commonResponse.message = "New actor created with id: " + actor.getId();
 
         HttpStatus httpStatus = HttpStatus.CREATED;
-<<<<<<< HEAD
 
-        //Ad log here before return
-=======
-        
->>>>>>> actor-controller
         return new ResponseEntity<>(commonResponse, httpStatus);
 
     }
@@ -76,14 +71,9 @@ public class ActorController {
 
     }
 
-<<<<<<< HEAD
-    @PatchMapping("/actor/{id}")
-    public ResponseEntity<CommonResponse> updateActor(@RequestBody Actor updatedActor, @PathVariable Integer id){
-=======
     @PutMapping("/actor/{id}")
     public ResponseEntity<CommonResponse> updateActor(@RequestBody Actor updatedActor,
                                                       @PathVariable ("id") Integer id){
->>>>>>> actor-controller
 
         CommonResponse commonResponse = new CommonResponse();
 
