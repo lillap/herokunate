@@ -20,8 +20,7 @@ public class ActorController {
 
     /*Add an actor */
     @PostMapping("/actor")
-    public ResponseEntity<CommonResponse> addActor(HttpServletRequest request, HttpServletResponse response,
-                                                   @RequestBody Actor actor) {
+    public ResponseEntity<CommonResponse> addActor(@RequestBody Actor actor) {
         actor = actorRepository.save(actor);
 
         CommonResponse commonResponse = new CommonResponse();
@@ -30,17 +29,14 @@ public class ActorController {
         commonResponse.message = "New actor created with id: " + actor.getId();
 
         HttpStatus httpStatus = HttpStatus.CREATED;
-
-        response.addHeader("Location", "/actor/" + actor.getId());
-
-        //Ad log here before return
+        
         return new ResponseEntity<>(commonResponse, httpStatus);
 
     }
 
     /*Get all actors with method findAll */
     @GetMapping("/actor/all")
-    public ResponseEntity<CommonResponse> getAllActors(HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> getAllActors() {
 
         CommonResponse commonResponse = new CommonResponse();
         commonResponse.data = actorRepository.findAll();
@@ -51,7 +47,7 @@ public class ActorController {
 
     /*Get actor by first checking if given id exists, if not, return message with actor was not found */
     @GetMapping("/actor/{id}")
-    ResponseEntity<CommonResponse> getActorById(HttpServletRequest request, @PathVariable("id") Integer id) {
+    ResponseEntity<CommonResponse> getActorById(@PathVariable("id") Integer id) {
 
         CommonResponse commonResponse = new CommonResponse();
         HttpStatus httpStatus;
@@ -70,10 +66,9 @@ public class ActorController {
 
     }
 
-    @PatchMapping("/actor/{id}")
-    public ResponseEntity<CommonResponse> updateActor(HttpServletRequest request,
-                                                      @RequestBody Actor updatedActor,
-                                                      @PathVariable Integer id){
+    @PutMapping("/actor/{id}")
+    public ResponseEntity<CommonResponse> updateActor(@RequestBody Actor updatedActor,
+                                                      @PathVariable ("id") Integer id){
 
         CommonResponse commonResponse = new CommonResponse();
 
@@ -92,7 +87,6 @@ public class ActorController {
             if(updatedActor.getUrl() != null){
                 actor.setUrl(updatedActor.getUrl());
             }
-
             actorRepository.save(actor);
 
             commonResponse.data = actor;
@@ -108,7 +102,7 @@ public class ActorController {
 
     /*Delete actor by checking first if the given id exists, if not, return a message and HttpStatus not found*/
     @DeleteMapping("/actor/{id}")
-    public ResponseEntity<CommonResponse> deleteActor(HttpServletRequest request, @PathVariable Integer id){
+    public ResponseEntity<CommonResponse> deleteActor(@PathVariable Integer id){
 
         CommonResponse commonResponse = new CommonResponse();
         HttpStatus httpStatus;
