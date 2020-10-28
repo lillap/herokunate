@@ -128,7 +128,7 @@ public class ActorController {
 
     /*Delete actor by checking first if the given id exists, if not, return a message and HttpStatus not found*/
     @DeleteMapping("/actor/{id}")
-    public ResponseEntity<CommonResponse> deleteActor(@PathVariable Integer id){
+    public ResponseEntity<CommonResponse> deleteActor(@PathVariable ("id") Integer id){
 
         CommonResponse commonResponse = new CommonResponse();
         HttpStatus httpStatus;
