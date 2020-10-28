@@ -36,7 +36,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/movie/{id}")
-    public ResponseEntity<CommonResponse> deleteMovie(@PathVariable Integer id) {
+    public ResponseEntity<CommonResponse> deleteMovie(@PathVariable ("id") Integer id) {
 
         CommonResponse commonResponse = new CommonResponse();
         HttpStatus httpStatus;
