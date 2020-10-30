@@ -20,7 +20,5 @@ The endpoints to test the funcationality can be accessed with Postman by followi
 The application is hosted on Heroku at: https://lillap-herokunate.herokuapp.com/
 
 #### Notes on Unfinished Business
-The CRUD functionality for movie is not complete yet. It is possible to add a movie and to get all movies.  
-Howver there is no implemented logic for a connection between movie and actor. 
-
+The CRUD functionality for movie is not complete yet. It is possible to only add a movie and to get all movies.
 
