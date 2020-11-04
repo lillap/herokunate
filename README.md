@@ -1,4 +1,4 @@
-# Task6 - Herokunate API
+# Herokunate API
 
 ## About The Project
 An API which can create, read, update and delete actors and movies from a Postgres database using Hibernate.
